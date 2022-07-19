@@ -10,9 +10,9 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id','username','password','name','email','account']
 
         def create(self, validated_data):
-            accountData = validated_data.pop('account') 
+            accountData = validated_data.pop('account')
             userInstance = User.objects.create(**validated_data)
-            Account.objects.create(User=userInstance, **accountData)
+            Account.objects.create(user=userInstance, **accountData)
             return userInstance
 
         def to_representation(self,obj):
@@ -24,7 +24,6 @@ class UserSerializer(serializers.ModelSerializer):
                 'name': user.name,
                 'email': user.email,
                 'account': {
-                    'id': account.id,
                     'balance': account.balance,
                     'lastChangeDate': account.lastChangeDate,
                     'isActive': account.isActive
