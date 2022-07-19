@@ -4,7 +4,7 @@ from bankApp.models.account import Account
 from bankApp.serializers.accountSerializer import AccountSerializer
 
 class UserSerializer(serializers.ModelSerializer):
-    account = AccountSerializer()
+    account = AccountSerializer(read_only=True)
     class Meta:
         model = User
         fields = ['id','username','password','name','email','account']
@@ -24,6 +24,7 @@ class UserSerializer(serializers.ModelSerializer):
                 'name': user.name,
                 'email': user.email,
                 'account': {
+                    'id': account.id,
                     'balance': account.balance,
                     'lastChangeDate': account.lastChangeDate,
                     'isActive': account.isActive
