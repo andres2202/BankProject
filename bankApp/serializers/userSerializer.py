@@ -5,6 +5,7 @@ from bankApp.serializers.accountSerializer import AccountSerializer
 
 class UserSerializer(serializers.ModelSerializer):
     account = AccountSerializer(read_only=True)
+    #account = AccountSerializer()
     class Meta:
         model = User
         fields = ['id','username','password','name','email','account']
