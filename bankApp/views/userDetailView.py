@@ -14,7 +14,7 @@ class UserDetailView(generics.RetrieveAPIView):
 
     def get(self, request, *args, **kwargs):
         token = request.META.get('HTTP_AUTHORIZATION')[7:]
-        TokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
+        tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
         valid_data = tokenBackend.decode(token, verify=false)
 
         if valid_data['user_id'] != kwargs['pk']:
